@@ -48,6 +48,7 @@ $("#submitbtn").click(function(e){
                 for(let i=0;i<data['recommendations'].length;i++) {
                     $("#pageSubmenu").append('<li><a href="#">'+data['recommendations'][i]+'</a></li>');
                 }
+                alert("Health Score Generated, please view it on the sidebar");
             },
             complete:function(data){
                 $("#loaderImg").hide();
