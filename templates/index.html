@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
+    <link rel="shortcut icon" href="../static/images/logo.png">
     <title>Health Score App</title>
 
     <!-- Bootstrap CSS CDN -->
@@ -25,7 +25,7 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3><a href="/healthscoreapp">MeFy Health Score</a></h3>
+                <h3><img src="../static/images/logo.png" width="50" height="50"><a href="/healthscoreapp">MeFy Health Score</a></h3>
                 <strong>HS</strong>
             </div>
 
@@ -62,8 +62,8 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
 
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
-                        <i class="fas fa-plus-circle"></i>
+                    <button type="button" id="sidebarCollapse" class="btn" style="background-color: #6d7fcc;">
+                        <i class="fas fa-bars" style="color: #FFFFFF"></i>
                     </button>
                     <h2>Welcome to MeFy Health Score Calculation App</h2>
                 </div>
@@ -82,91 +82,96 @@
             <span class="badge badge-pill badge-primary" style="font-size: 15px;">SMOKING</span>
             <div class="line"></div>
             
-            <div class="container">
+            <div class="container" style="background-color: #FFFFFF; padding-top: 10px">
                 <form>
-                <div class="row">
-                    <div class="col col-sm-3">
-                        <p style="font-size: 14px; font-weight: bold">How old are you?</p>
-                        <input type="text" name="age" required class="form-control">
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="age">How old are you?</label>
+                            <input type="text" name="age" id="age" required class="form-control">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Gender</label>
+                            <br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male">
+                                <label class="form-check-label" for="inlineRadio1">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="female">
+                                <label class="form-check-label" for="inlineRadio2">Female</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="weight">What is your weight?</label>
+                            <input class="form-control" type="text" name="weight" id="weight" placeholder="in Kg">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="height">What is your height?</label>
+                            <input class="form-control" type="text" name="height" id="height" placeholder="in feet">
+                        </div>
                     </div>
-                    <div class="col col-sm-3">
-                        <p style="font-size: 14px; font-weight: bold">You are?</p>
-                        <input type="radio" name="gender" value="male" required> Male
-                        <input type="radio" name="gender" value="female" required> Female
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="heartrate">Heart rate?</label>
+                            <input class="form-control" type="text" name="heartrate" id="heartrate">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="bloodpressuresys">Systolic Blood Pressure?</label>
+                            <input class="form-control" type="text" name="bloodpressuresys" id="bloodpressuresys">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="bloodpressuredia">Diastolic Blood Pressure?</label>
+                            <input class="form-control" type="text" name="bloodpressuredia" id="bloodpressuredia">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="cholestrol">Cholesterol?</label>
+                            <input class="form-control" type="text" name="cholestrol" id="cholestrol" placeholder="mg/dL">
+                        </div>
                     </div>
-                    <div class="col col-sm-3">
-                        <p style="font-size: 14px; font-weight: bold">What is your weight?</p>
-                        <input type="text" name="weight" required placeholder="in Kg">
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="avgbloodsugar">Average Blood Sugar?</label>
+                            <input class="form-control" type="text" name="avgbloodsugar" id="avgbloodsugar" placeholder="mg/dL">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="alcoholconsumptiondaily">Daily alcohol consumption?</label>
+                            <input class="form-control" type="text" name="alcoholconsumptiondaily" id="alcoholconsumptiondaily" placeholder="glass(es)">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="alocholconsumptionweekly">Weekly alcohol consumption?</label>
+                            <input class="form-control" type="text" name="alocholconsumptionweekly" id="alocholconsumptionweekly" placeholder="glass(es)">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Do you smoke?</label>
+                            <br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="smoker" id="smokeRadio1" value="yes">
+                                <label class="form-check-label" for="smokeRadio1">Yes</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="smoker" id="smokeRadio2" value="no">
+                                <label class="form-check-label" for="smokeRadio2">No</label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col col-sm-3">
-                        <p style="font-size: 14px; font-weight: bold">What is your height?</p>
-                        <input type="text" name="height" required placeholder="in feet">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <button type="button" id="submitbtn" class="btn btn-success w-100">Get Health Score</button>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <button type="reset" class="btn btn-danger w-100">Clear All Data</button>
+                        </div>
+                        <div class="form-group col-md-4" id="loaderImg">
+                            <img src="../static/images/Spinner-1s-181px.gif" width="40" height="40"> <span class="font-weight-bold">Calculating Your Score..</span>
+                        </div>
                     </div>
-                    
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col col-sm-3">
-                        <p style="font-size: 14px; font-weight: bold">Heart Rate?</p>
-                        <input type="text" name="heartrate" required>
-                    </div>
-                    <div class="col col-sm-3">
-                        <p style="font-size: 14px; font-weight: bold">Systolic Blood Pressure?</p>
-                        <input type="text" name="bloodpressuresys" required>
-                    </div>
-                    <div class="col col-sm-3">
-                        <p style="font-size: 14px; font-weight: bold">Diastolic Blood Pressure?</p>
-                        <input type="text" name="bloodpressuredia" required> 
-                    </div>
-                    <div class="col col-sm-3">
-                        <p style="font-size: 14px; font-weight: bold">Cholesterol?</p>
-                        <input type="text" name="cholestrol" required> mg/dL
-                    </div>
-                    
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col col-sm-3">
-                        <p style="font-size: 14px; font-weight: bold">Average Blood Sugar?</p>
-                        <input type="text" name="avgbloodsugar" required> mg/dL
-                    </div>
-                    <div class="col col-sm-3">
-                        <p style="font-size: 14px; font-weight: bold">Daily alcohol consumption?</p>
-                        <input type="text" name="alcoholconsumptiondaily"required> glass(es)
-                    </div>
-                    <div class="col col-sm-3">
-                        <p style="font-size: 14px; font-weight: bold">Weekly alcohol consumption?</p>
-                        <input type="text" name="alocholconsumptionweekly" required> glass(es)
-                    </div>
-                    <div class="col col-sm-3">
-                        <p style="font-size: 14px; font-weight: bold">Do you smoke?</p>
-                        <input type="radio" name="smoker" value="yes" required> Yes
-                        <input type="radio" name="smoker" value="no" required> No
-                    </div>
-                    
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col col-sm-3">
-                        <button type="button" id="submitbtn" class="btn btn-success w-100">Get Health Score</button>
-                    </div>
-                    <div class="col col-sm-3">
-                        <button type="reset" class="btn btn-danger w-100">Clear All Data</button>
-                    </div>
-                    <div class="col col-sm-3" id="loaderImg">
-                        <img src="../static/images/Spinner-1s-181px.gif" width="40" height="40"> <span class="font-weight-bold">Calculating Your Score..</span>
-                    </div>
-                </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="../static/js/jquery-3.5.1.min.js"></script>
-    <!-- Popper.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
     <script src="../static/js/main.js"></script>
     <script type="text/javascript">
