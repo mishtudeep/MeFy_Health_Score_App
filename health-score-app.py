@@ -11,6 +11,43 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
+@app.route('/api/getAllData')
+def getAllData():
+    try:
+        connection, cursor = dbconnect.getConnection()
+        statement = 'Select * from heathscoredata'
+        cursor.execute(statement)
+
+        data = cursor.fetchall();
+        
+        dataModel = {}
+        op = []
+        for d in data:
+            dataModel = {
+                'id': d[0],
+                'timestamp': str(d[1]),
+                'age': d[2],
+                'gender': d[3],
+                'height': d[4],
+                'weight': d[5],
+                'heartrate': d[6],
+                'bloodpressuresys': d[7],
+                'bloodpressuredia': d[8],
+                'bmi': d[9],
+                'cholestterollevel': d[10],
+                'avgBloodSugarLevel': d[11],
+                'alcoholConsumptionDaily': d[12],
+                'alcoholConsumptionWeekly':d[13],
+                'smoker': d[14],
+                'score': d[15],
+                'username': d[16]
+            }
+            op.append(dataModel)
+        return json.dumps(op)
+    except Exception as e:
+        print("Error in fetching data", e)
+        return json.dumps({'message':'Error in fetching data'})
+
 @app.route('/api/getScore', methods=['POST'])
 def getValues():
     age=int(request.form['age'])
@@ -26,6 +63,7 @@ def getValues():
     alcoholconsumptiondaily=int(request.form['alcoholconsumptiondaily'])
     alocholconsumptionweekly=int(request.form['alocholconsumptionweekly'])
     smoker=request.form['smoker']
+    username=request.form['username']
 
     score, recommendations = calculatehealthscore(age, gender, height, weight, heartrate, bloodpressuresys, bloodpressuredia, cholestrol, avgbloodsugar, alcoholconsumptiondaily, alocholconsumptionweekly, smoker)
     bmi = weight / (height**2)
@@ -38,8 +76,47 @@ def getValues():
     try:
         connection, cursor = dbconnect.getConnection()
         
-        values = (idno, timestamp, age, gender, height, weight, heartrate, bloodpressuresys, bloodpressuredia, bmi, cholestrol, avgbloodsugar, alcoholconsumptiondaily, alocholconsumptionweekly, smoker, score)
-        statement="INSERT INTO heathscoredata VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        values = (idno, timestamp, age, gender, height, weight, heartrate, bloodpressuresys, bloodpressuredia, bmi, cholestrol, avgbloodsugar, alcoholconsumptiondaily, alocholconsumptionweekly, smoker, score, username)
+        statement="INSERT INTO heathscoredata VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        cursor.execute(statement, values)
+        connection.commit()
+        connection.close()
+    except Exception as e:
+        connection.close()
+        print(e)
+    
+    return json.dumps({'score': score, 'recommendations': recommendations})
+
+@app.route('/api/getScoreApp', methods=['POST'])
+def getValuesApp():
+    age=int(request.json['age'])
+    gender=request.json['gender']
+    height=float(request.json['height'])
+    height = height / 3.281
+    weight=float(request.json['weight'])
+    heartrate=int(request.json['heartrate'])
+    bloodpressuresys=float(request.json['bloodpressuresys'])
+    bloodpressuredia=float(request.json['bloodpressuredia'])
+    cholestrol=float(request.json['cholestrol'])
+    avgbloodsugar=float(request.json['avgbloodsugar'])
+    alcoholconsumptiondaily=int(request.json['alcoholconsumptiondaily'])
+    alocholconsumptionweekly=int(request.json['alocholconsumptionweekly'])
+    smoker=request.json['smoker']
+    username=request.json['username']
+
+    score, recommendations = calculatehealthscore(age, gender, height, weight, heartrate, bloodpressuresys, bloodpressuredia, cholestrol, avgbloodsugar, alcoholconsumptiondaily, alocholconsumptionweekly, smoker)
+    bmi = weight / (height**2)
+    
+    #DATABASE TRANSACTION
+    
+    timestamp = str(datetime.now(pytz.timezone('Asia/Kolkata')))[:-13]
+    ts = datetime.now(pytz.timezone('Asia/Kolkata'))
+    idno = str(ts.year)+str(ts.month)+str(ts.day)+str(ts.hour)+str(ts.minute)+str(ts.second)
+    try:
+        connection, cursor = dbconnect.getConnection()
+        
+        values = (idno, timestamp, age, gender, height, weight, heartrate, bloodpressuresys, bloodpressuredia, bmi, cholestrol, avgbloodsugar, alcoholconsumptiondaily, alocholconsumptionweekly, smoker, score, username)
+        statement="INSERT INTO heathscoredata VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
         cursor.execute(statement, values)
         connection.commit()
         connection.close()
@@ -108,7 +185,7 @@ def getHeartRateScore(age, heartrate):
     elif age >= 26 and age <= 35:
         if heartrate >= 50 and heartrate <60:
             return 25, "HEART RATE: Your heart condition is very good, stay healthy"
-        elif heartrate >= 60 and heartrate < 72:
+        elif heartrate >= 60 and heartrate <= 72:
             return 20, "EART RATE: Your heart condition is good, stay healthy"
         elif heartrate >= 73 and heartrate < 76:
             return 15, "HEART RATE: Your heart condition is average, eat healthy food and exercise"
