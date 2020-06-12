@@ -39,7 +39,8 @@ def getAllData():
                 'alcoholConsumptionDaily': d[12],
                 'alcoholConsumptionWeekly':d[13],
                 'smoker': d[14],
-                'score': d[15]
+                'score': d[15],
+                'username': d[16]
             }
             op.append(dataModel)
         return json.dumps(op)
@@ -62,6 +63,7 @@ def getValues():
     alcoholconsumptiondaily=int(request.form['alcoholconsumptiondaily'])
     alocholconsumptionweekly=int(request.form['alocholconsumptionweekly'])
     smoker=request.form['smoker']
+    username=request.form['username']
 
     score, recommendations = calculatehealthscore(age, gender, height, weight, heartrate, bloodpressuresys, bloodpressuredia, cholestrol, avgbloodsugar, alcoholconsumptiondaily, alocholconsumptionweekly, smoker)
     bmi = weight / (height**2)
@@ -74,8 +76,8 @@ def getValues():
     try:
         connection, cursor = dbconnect.getConnection()
         
-        values = (idno, timestamp, age, gender, height, weight, heartrate, bloodpressuresys, bloodpressuredia, bmi, cholestrol, avgbloodsugar, alcoholconsumptiondaily, alocholconsumptionweekly, smoker, score)
-        statement="INSERT INTO heathscoredata VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        values = (idno, timestamp, age, gender, height, weight, heartrate, bloodpressuresys, bloodpressuredia, bmi, cholestrol, avgbloodsugar, alcoholconsumptiondaily, alocholconsumptionweekly, smoker, score, username)
+        statement="INSERT INTO heathscoredata VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
         cursor.execute(statement, values)
         connection.commit()
         connection.close()
@@ -100,6 +102,8 @@ def getValuesApp():
     alcoholconsumptiondaily=int(request.json['alcoholconsumptiondaily'])
     alocholconsumptionweekly=int(request.json['alocholconsumptionweekly'])
     smoker=request.json['smoker']
+    username=request.json['username']
+
     score, recommendations = calculatehealthscore(age, gender, height, weight, heartrate, bloodpressuresys, bloodpressuredia, cholestrol, avgbloodsugar, alcoholconsumptiondaily, alocholconsumptionweekly, smoker)
     bmi = weight / (height**2)
     
@@ -111,8 +115,8 @@ def getValuesApp():
     try:
         connection, cursor = dbconnect.getConnection()
         
-        values = (idno, timestamp, age, gender, height, weight, heartrate, bloodpressuresys, bloodpressuredia, bmi, cholestrol, avgbloodsugar, alcoholconsumptiondaily, alocholconsumptionweekly, smoker, score)
-        statement="INSERT INTO heathscoredata VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        values = (idno, timestamp, age, gender, height, weight, heartrate, bloodpressuresys, bloodpressuredia, bmi, cholestrol, avgbloodsugar, alcoholconsumptiondaily, alocholconsumptionweekly, smoker, score, username)
+        statement="INSERT INTO heathscoredata VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
         cursor.execute(statement, values)
         connection.commit()
         connection.close()

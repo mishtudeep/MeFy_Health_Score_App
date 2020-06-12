@@ -41,6 +41,12 @@ $("#submitbtn").click(function(e){
 	const alcoholconsumptiondaily=$("input[name=alcoholconsumptiondaily]").val();
 	const alocholconsumptionweekly=$("input[name=alocholconsumptionweekly]").val();
     const smoker=$("input[name=smoker]:checked").val();
+    const username=$("input[name=username]").val();
+
+    if(username === ''){
+        alert("Please provide your name");
+        return;
+    }
     
     if(checkAge(age) === false || checkField(weight) === false || checkField(height) === false || checkField(heartrate) === false || checkField(bloodpressuresys) === false || checkField(bloodpressuredia) === false || checkField(cholestrol) === false || checkField(avgbloodsugar) === false || checkField(alcoholconsumptiondaily) === false || checkField(alocholconsumptionweekly) === false){
         console.error("Fill all the values");
@@ -68,7 +74,8 @@ $("#submitbtn").click(function(e){
                 "avgbloodsugar":avgbloodsugar,
                 "alcoholconsumptiondaily":alcoholconsumptiondaily,
                 "alocholconsumptionweekly":alocholconsumptionweekly,
-                "smoker":smoker
+                "smoker":smoker,
+                "username":username
             },
             method: 'POST',
             success: function(data){
