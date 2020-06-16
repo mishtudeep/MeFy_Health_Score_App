@@ -102,6 +102,7 @@ $("#submitbtn").click(function(e){
                     $("#pageSubmenu").append('<li><a href="#">'+data['recommendations'][i]+'</a></li>');
                 }
                 alert("Your Health Score is "+data['score']+", "+scorecomment+", for more details please view it on the sidebar");
+                $("#notibadge").html("8 New Tips");
             },
             complete:function(data){
                 $("#loaderImg").hide();
