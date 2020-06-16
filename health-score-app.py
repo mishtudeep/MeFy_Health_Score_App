@@ -187,7 +187,7 @@ def getHeartRateScore(age, heartrate):
             return 25, "HEART RATE: Your heart condition is very good, stay healthy"
         elif heartrate >= 60 and heartrate <= 72:
             return 20, "EART RATE: Your heart condition is good, stay healthy"
-        elif heartrate >= 73 and heartrate < 76:
+        elif heartrate >= 73 and heartrate <=76:
             return 15, "HEART RATE: Your heart condition is average, eat healthy food and exercise"
         elif heartrate >= 77 and heartrate <80:
             return 10, "HEART RATE: Your heart condition might be bad, consider consulting a doctor"
