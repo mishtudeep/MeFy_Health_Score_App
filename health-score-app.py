@@ -315,4 +315,4 @@ def getBloodSugarScore(avgbloodsugar):
         return 5, "BLOOD SUGAR: Your blood sugar is in a diabetic condition, take necessary medical steps to remain healthy"
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port=80, debug=True)
+    app.run(host='0.0.0.0',port=5000, debug=True)
