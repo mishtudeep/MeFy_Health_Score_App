@@ -307,11 +307,11 @@ def getCholesterolScore(cholestrol):
         return 5, "CHOLESTEROL: You have extremely high cholesterol level, this might lead to heart disease, stroke. Seek immediate medical help"
 
 def getBloodSugarScore(avgbloodsugar):
-    if avgbloodsugar < 110:
+    if avgbloodsugar < 140:
         return 20, "BLOOD SUGAR: Your blood sugar is at normal level"
-    elif avgbloodsugar >= 110 and avgbloodsugar <= 140:
+    elif avgbloodsugar >= 140 and avgbloodsugar < 200:
         return 15, "BLOOD SUGAR: Your blood sugar is in pre diabetic condition"
-    elif avgbloodsugar > 140:
+    elif avgbloodsugar >= 200:
         return 5, "BLOOD SUGAR: Your blood sugar is in a diabetic condition, take necessary medical steps to remain healthy"
 
 if __name__ == '__main__':
